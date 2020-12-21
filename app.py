@@ -1,7 +1,12 @@
-from flask import Flask, jsonify,request
+from flask import Flask, jsonify,request, render_template
 import time
-app = Flask(__name__);
-@app.route("/bot", methods=["POST"])
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return render_template('index.html')
+
+@app.route("/bot", methods=["GET", "POST"])
 def response():
     query = dict(request.form)['query']
     res = query + " " + time.ctime()
